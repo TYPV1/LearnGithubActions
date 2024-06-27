@@ -39,3 +39,4 @@ jobs:
 
    # 11) Setup Jfrog environment
    - uses: jfrog/setup-jfrog-cli@v4
+   - run: jf --version
