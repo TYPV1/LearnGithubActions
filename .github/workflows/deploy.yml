@@ -14,13 +14,13 @@ on:
 
 jobs:
   build:
-   runs-on: ${{matrix.os}}
+   runs-on: ubuntu-latest
    permissions:
       packages: write
       contents: read
    strategy:
      matrix:
-        os: ["self-hosted"]
+        os: [windows-latest, ]
         node-version: [18.x]
         nuget: [latest]
 
