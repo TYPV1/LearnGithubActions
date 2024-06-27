@@ -1,5 +1,5 @@
 # The name of the workflow.
-name: Manual Deployment
+name: GitHub Actions Runner Deployment
 
 # Trigger this workflow on a push, or pull request to
 # the main branch, when either C# or project files changed
