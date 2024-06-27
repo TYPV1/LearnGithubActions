@@ -11,3 +11,28 @@ on:
         description: 'Deployment environment'
         required: true
         default: 'staging'
+
+jobs:
+  build:
+   runs-on: ${{matrix.os}}
+   permissions:
+      packages: write
+      contents: read
+   strategy:
+     matrix:
+        os: ["self-hosted"]
+        node-version: [18.x]
+        nuget: [latest]
+
+   steps:  
+   - uses: actions/checkout@v4
+
+   # Setup nuget 
+   - name: Setup Nuget.exe
+     uses: nuget/setup-nuget@v2
+     with:
+       nuget-version: ${{matrix.nuget}}
+
+   # Config package folder
+   - name: set repo path
+     run: nuget config -Set repositoryPath= C:/fni/Teamcity/
