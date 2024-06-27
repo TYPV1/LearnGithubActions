@@ -20,7 +20,7 @@ jobs:
       contents: read
    strategy:
      matrix:
-        os: [windows-latest, ]
+        #os: [windows-latest, ]
         node-version: [18.x]
         nuget: [latest]
 
@@ -36,3 +36,6 @@ jobs:
    # Config package folder
    - name: set repo path
      run: nuget config -Set repositoryPath= C:/fni/Teamcity/
+
+   # 11) Setup Jfrog environment
+   - uses: jfrog/setup-jfrog-cli@v4
