@@ -1,1 +1,13 @@
 
+# The name of the workflow.
+name: Manual Deployment
+
+# Trigger this workflow on a push, or pull request to
+# the main branch, when either C# or project files changed
+on:    
+  workflow_dispatch:
+   inputs:
+      environment:
+        description: 'Deployment environment'
+        required: true
+        default: 'staging'
