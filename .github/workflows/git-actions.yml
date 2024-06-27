@@ -1,0 +1,41 @@
+# The name of the workflow.
+name: Manual Deployment
+
+# Trigger this workflow on a push, or pull request to
+# the main branch, when either C# or project files changed
+on:    
+  workflow_dispatch:
+   inputs:
+      environment:
+        description: 'Deployment environment'
+        required: true
+        default: 'staging'
+
+jobs:
+  FNI-dev:
+   runs-on: ubuntu-latest
+   permissions:
+      packages: write
+      contents: read
+   strategy:
+     matrix:
+        #os: [windows-latest, ]
+        node-version: [18.x]
+        nuget: [latest]
+
+   steps:  
+   - uses: actions/checkout@v4
+
+   # Setup nuget 
+   - name: Setup Nuget.exe
+     uses: nuget/setup-nuget@v2
+     with:
+       nuget-version: ${{matrix.nuget}}
+
+   # Config package folder
+   - name: set repo path
+     run: nuget config -Set repositoryPath= C:/fni/Teamcity/
+
+   # 11) Setup Jfrog environment
+   - uses: jfrog/setup-jfrog-cli@v4
+   - run: jf --version
